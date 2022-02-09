@@ -166,11 +166,27 @@ def sendTextMessageToMe():
 
 
 def getNameEmojiMessage():
-    lookUpStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    productId = "5ac21a8c040ab15980c9b43f"
-    name = ""
-    message = dict()
-    return message
+    emoji = [
+        {
+            "index": 0,
+            "productId": "5ac1bfd5040ab15980c9b435",
+            "emojiId": "001"
+        },
+        {
+            "index": 13,
+            "productId": "5ac1bfd5040ab15980c9b435",
+            "emojiId": "002"
+        }
+    ]
+    text_message = TextSendMessage(text='$ LINE emoji $', emojis=emoji)
+    return text_message
+    # lookUpStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    # productId = "5ac21a8c040ab15980c9b43f"
+    # name = ""
+    # message = dict()
+    # return message
+
+
 
 
 def getCarouselMessage(data):
