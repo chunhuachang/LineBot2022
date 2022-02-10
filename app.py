@@ -166,28 +166,22 @@ def sendTextMessageToMe():
 
 
 def getNameEmojiMessage():
-    emoji = [
-        {
-            "index": 0,
-            "productId": "5ac21a8c040ab15980c9b43f",
-            "emojiId": "004"
-        },
-        {
-            "index": 1,
-            "productId": "5ac21a8c040ab15980c9b43f",
-            "emojiId": "001"
-        },
-        {
-            "index": 2,
-            "productId": "5ac21a8c040ab15980c9b43f",
-            "emojiId": "025"
-        },
-    ]
-    # lookUpStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    # productId = "5ac21a8c040ab15980c9b43f"
-    # name = ""
-    # message = dict()
-    message=TextSendMessage(text='$$$ 09 回覆emoji訊息', emojis=emoji)
+    lookUpStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    productId = "5ac21a8c040ab15980c9b43f"
+    name = "Rina"
+    message = dict()
+    message["type"] = "text"
+    message["text"] = "".join("$" for r in range(len(name)))
+    emojis_list = list()
+    for i, nChar in enumerate(name):
+        emojis_list.append(
+            {
+                "index": i,
+                "productId": productId,
+                "emojiId": f"{lookUpStr.index(nChar) + 1 :03}"
+            }
+        )
+    message["emojis"] = emojis_list
     return message
 
 
