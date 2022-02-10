@@ -108,7 +108,7 @@ def index():
                         ]
                 replyMessage(payload)
             elif events[0]["message"]["type"] == "location":
-                title = events[0]["message"].get("title","")
+                title = events[0]["message"].get("title", "")
                 latitude = events[0]["message"]["latitude"]
                 longitude = events[0]["message"]["longitude"]
                 payload["messages"] = [getLocationConfirmMessage(title, latitude, longitude)]
@@ -172,7 +172,7 @@ def sendTextMessageToMe():
 def getNameEmojiMessage():
     lookUpStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     productId = "5ac21a8c040ab15980c9b43f"
-    name = "Rina"
+    name = "Miles"
     message = dict()
     message["type"] = "text"
     message["text"] = "".join("$" for r in range(len(name)))
@@ -180,15 +180,13 @@ def getNameEmojiMessage():
     for i, nChar in enumerate(name):
         emojis_list.append(
             {
-                "index": i,
-                "productId": productId,
-                "emojiId": f"{lookUpStr.index(nChar) + 1 :03}"
+              "index": i,
+              "productId": productId,
+              "emojiId": f"{lookUpStr.index(nChar) + 1 :03}"
             }
         )
     message["emojis"] = emojis_list
     return message
-
-
 
 
 def getCarouselMessage(data):
@@ -221,28 +219,28 @@ def getCarouselMessage(data):
 
 
 def getLocationConfirmMessage(title, latitude, longitude):
-    data = {"title":title, "latitude":latitude,"longitude":longitude,'action': 'get_near'}
+    data = {'title': title, 'latitude': latitude, 'longitude': longitude,
+            'action': 'get_near'}
     message = {
-        "type": "template",
-        "altText": "this is a confirm template",
-        "template": {
-            "type": "confirm",
-            "text": f"確認是否搜尋 {title} 附近地點？",
-            "actions": [
-                {
-                    "type": "postback",
-                    "label": "是",
-                    "data": json.dump(data)
-                },
-                {
-                    "type": "message",
-                    "label": "否",
-                    "text": "否"
-                }
-            ]
-        }
+      "type": "template",
+      "altText": "this is a confirm template",
+      "template": {
+          "type": "confirm",
+          "text": f"確認是否搜尋 {title} 附近地點？",
+          "actions": [
+              {
+                 "type": "postback",
+               "label": "是",
+               "data": json.dumps(data),
+               },
+              {
+                "type": "message",
+                "label": "否",
+                "text": "n否"
+              }
+          ]
+      }
     }
-    # message = dict()
     return message
 
 
@@ -262,10 +260,10 @@ def getPlayStickerMessage():
 def getTaipei101LocationMessage():
     message = dict()
     message["type"] = "location"
-    message["title"] = "Taipei101"
-    message["address"] = "台北市信義區信義路五段7號"
-    message["latitude"] = "25.034056468449304"
-    message["longitude"] = "121.56466736984362"
+    message["title"] = "台北101"
+    message["address"] = "110台北市信義區信義路五段7號"
+    message["latitude"] = 25.034056468449304
+    message["longitude"] = 121.56466736984362
     return message
 
 
@@ -273,7 +271,7 @@ def getMRTVideoMessage():
     message = dict()
     message["type"] = "video"
     message["originalContentUrl"] = F"{end_point}/static/taipei_101_video.mp4"
-    message["previewImageUrl"] =  F"{end_point}/static/taipei_101.jpeg"
+    message["previewImageUrl"] = F"{end_point}/static/taipei_101.jpeg"
     return message
 
 
@@ -302,7 +300,7 @@ def getImageMessage(originalContentUrl):
 
 
 def replyMessage(payload):
-    response = requests.post("https://api.line.me/v2/bot/message/reply", headers=HEADER, data=json.dumps(payload))
+    response = requests.post("https://api.line.me/v2/bot/message/reply",headers=HEADER,data=json.dumps(payload))
     return 'OK'
 
 
@@ -312,7 +310,7 @@ def pushMessage(payload):
 
 
 def getTotalSentMessageCount():
-    response = requests.get("https://api.line.me/v2/bot/message/quota/consumption", headers=HEADER)
+    response = requests.get("https://api.line.me/v2/bot/message/quota/consumption",headers=HEADER)
     return response.json()["totalUsage"]
 
 
