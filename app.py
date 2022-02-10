@@ -199,14 +199,14 @@ def getLocationConfirmMessage(title, latitude, longitude):
 
 def getCallCarMessage(data):
     message = dict()
-    message["type"] = "sticker"
-    message["packageId"] = "446"
-    message["stickerId"] = "1988"
     return message
 
 
 def getPlayStickerMessage():
     message = dict()
+    message["type"] = "sticker"
+    message["packageId"] = "446"
+    message["stickerId"] = "1988"
     return message
 
 
